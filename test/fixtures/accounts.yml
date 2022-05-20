@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  bank: MyString
+  uid: MyString
+  valid_until: 2022-05-20 22:43:05
+
+two:
+  name: MyString
+  bank: MyString
+  uid: MyString
+  valid_until: 2022-05-20 22:43:05

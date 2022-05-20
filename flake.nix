@@ -47,12 +47,15 @@
           default = klutters;
           klutters = pkgs.devshell.mkShell {
             name = "Klutters";
+            imports = [ "${devshell}/extra/language/c.nix" ];
             packages = [
-              gems
-              (pkgs.lowPrio gems.wrappedRuby)
+              pkgs.ruby_3_1
+              #gems
               pkgs.bundix
               pkgs.nixpkgs-fmt
               pkgs.postgresql_14
+              pkgs.yarn
+              pkgs.gnumake
             ];
             env = [
               {
@@ -62,6 +65,14 @@
               {
                 name = "DATABASE_HOST";
                 eval = "$PGDATA";
+              }
+              {
+                name = "GEM_HOME";
+                eval = "$PWD/vendor/bundle/$(ruby -e 'puts RUBY_VERSION')";
+              }
+              {
+                name = "PATH";
+                eval = "$GEM_HOME/bin:$PATH";
               }
             ];
             commands = [
@@ -73,7 +84,7 @@
                   initdb --encoding=UTF8 --no-locale --no-instructions -U postgres
                   echo "listen_addresses = ${"'"}${"'"}" >> $PGDATA/postgresql.conf
                   echo "unix_socket_directories = '$PGDATA'" >> $PGDATA/postgresql.conf
-                  echo "CREATE USER accentor WITH PASSWORD 'accentor' CREATEDB;" | postgres --single -E postgres
+                  echo "CREATE USER klutters WITH PASSWORD 'klutters' CREATEDB;" | postgres --single -E postgres
                 '';
               }
               {
@@ -102,6 +113,11 @@
                 '';
               }
             ];
+            language.c = {
+              compiler = pkgs.gcc;
+              includes = [ pkgs.postgresql_14 pkgs.openssl pkgs.zlib ];
+              libraries = [ pkgs.postgresql_14 pkgs.openssl pkgs.zlib ];
+            };
           };
         };
       }
