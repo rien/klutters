@@ -1,4 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id          :bigint           not null, primary key
+#  bank        :string
+#  name        :string
+#  uid         :string
+#  valid_until :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 
 one:
   name: MyString
