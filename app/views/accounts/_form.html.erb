@@ -1,8 +1,7 @@
 <%= form_with(model: account) do |form| %>
   <% if account.errors.any? %>
-    <div style="color: red">
+    <div class="notification is-danger">
       <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
       <ul>
         <% account.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,27 +10,28 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="field">
+    <%= form.label :name, class: "label" %>
+    <div class="control">
+      <%= form.text_field :name, class: "input" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :bank, style: "display: block" %>
-    <%= form.text_field :bank %>
+  <div class="field">
+    <%= form.label :bank, class: "label" %>
+    <div class="control">
+      <%= form.text_field :bank, class: "input" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :uid, style: "display: block" %>
-    <%= form.text_field :uid %>
+  <div class="field">
+    <%= form.label :country, class: "label" %>
+    <div class="control">
+      <%= form.text_field :country, class: "input" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :valid_until, style: "display: block" %>
-    <%= form.datetime_field :valid_until %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="field">
+    <%= form.submit class: "button" %>
   </div>
 <% end %>

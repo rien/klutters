@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4"><%= account.name %></p>
+        <p class="subtitle is-6"><%= account.bank %></p>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="level">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Balance</p>
+            <p class="title">€999</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Transactions</p>
+            <p class="title">123</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Status</p>
+            <% if account.active? %>
+              <p class="title has-text-success">ONLINE</p>
+            <% else %>
+              <p class="title has-text-danger">OFFLINE</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= link_to "Transactions", account_path(account), class: 'card-footer-item' %>
+    <%= link_to "Edit", edit_account_path(account), class: 'card-footer-item' %>
+    <%= button_to "Relink", link_account_path(account), class: "card-footer-item" %>
+  </div>
+</div>

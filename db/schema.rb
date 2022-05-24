@@ -15,9 +15,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_204305) do
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.string "name"
-    t.string "bank"
+    t.string "name", null: false
+    t.string "bank", null: false
+    t.string "country", null: false
     t.string "uid"
+    t.string "session"
+    t.string "link_state_token"
+    t.integer "balance_cents", default: 0, null: false
+    t.string "balance_currency", default: "EUR", null: false
+    t.boolean "active"
     t.datetime "valid_until", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

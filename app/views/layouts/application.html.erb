@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
   <head>
     <title>Klutters</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,8 +8,25 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
-
-  <body>
-    <%= yield %>
+  <body class="has-background-light" style="min-height: 100vh">
+    <nav class="navbar is-white">
+      <div class="container">
+        <div class="navbar-brand">
+          <%= link_to "Klutters", root_path, class: "navbar-item brand-text" %>
+          <%= link_to "Transactions", "#", class: "navbar-item" %>
+          <%= link_to "Accounts", accounts_path, class: "navbar-item" %>
+        </div>
+      </div>
+    </nav>
+    <main class="container">
+      <% if defined?(notice) && notice.present? %>
+        <div class="container>">
+          <div class="notification is-primary is-light">
+            <%= notice %>
+          </div>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>

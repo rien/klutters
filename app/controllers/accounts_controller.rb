@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ show edit update destroy ]
+  before_action :set_account, only: %i[ show edit update destroy link]
+  before_action :set_tilisy, only: %i[link callback]
 
   # GET /accounts or /accounts.json
   def index
@@ -23,27 +24,19 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(account_params)
 
-    respond_to do |format|
-      if @account.save
-        format.html { redirect_to account_url(@account), notice: "Account was successfully created." }
-        format.json { render :show, status: :created, location: @account }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
+    if @account.save
+      redirect_to account_url(@account), notice: "Account was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /accounts/1 or /accounts/1.json
   def update
-    respond_to do |format|
-      if @account.update(account_params)
-        format.html { redirect_to account_url(@account), notice: "Account was successfully updated." }
-        format.json { render :show, status: :ok, location: @account }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
+    if @account.update(account_params)
+      redirect_to account_url(@account), notice: "Account was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -51,10 +44,16 @@ class AccountsController < ApplicationController
   def destroy
     @account.destroy
 
-    respond_to do |format|
-      format.html { redirect_to accounts_url, notice: "Account was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to accounts_url, notice: "Account was successfully destroyed."
+  end
+
+  def link
+    redirect_to @tilisy.authorize_url_for(@account), allow_other_host: true
+  end
+
+  def callback
+    @account = Account.find_by(link_state_token: params[:state])
+    @session = @tilisy.session_for_code(params[:code])
   end
 
   private
@@ -63,8 +62,12 @@ class AccountsController < ApplicationController
       @account = Account.find(params[:id])
     end
 
+    def set_tilisy
+      @tilisy = Tilisy::Api.new
+    end
+
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:name, :bank, :uid, :valid_until)
+      params.require(:account).permit(:name, :bank, :country)
     end
 end
