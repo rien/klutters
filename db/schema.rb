@@ -10,23 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_20_204305) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_06_182610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
-    t.string "bank", null: false
-    t.string "country", null: false
     t.string "uid"
-    t.string "session"
-    t.string "link_state_token"
+    t.bigint "session_id"
     t.integer "balance_cents", default: 0, null: false
     t.string "balance_currency", default: "EUR", null: false
-    t.boolean "active"
-    t.datetime "valid_until", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_accounts_on_session_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "uid"
+    t.datetime "valid_until", precision: nil
+    t.string "bank", null: false
+    t.string "country", null: false
+    t.string "link_state_token"
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "EUR", null: false
+    t.string "other"
+    t.string "reference", null: false
+    t.string "description", null: false
+    t.string "status", null: false
+    t.date "booked_at", null: false
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
+    t.index ["reference", "account_id"], name: "index_transactions_on_reference_and_account_id"
   end
 
 end

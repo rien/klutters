@@ -2,12 +2,8 @@
   <div class="card-content">
     <div class="media">
       <div class="media-content">
-        <% if account.name.blank? %>
-          <p class="title is-4 has-text-grey">Unnamed account</p>
-        <% else %>
-          <p class="title is-4"><%= account.name %></p>
-        <% end %>
-        <p class="subtitle is-6"><%= account.bank %></p>
+        <p class="title is-4"><%= session.bank %></p>
+        <p class="subtitle is-6"><%= session.country %></p>
       </div>
     </div>
 
@@ -16,7 +12,7 @@
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">Balance</p>
-            <p class="title"><%= account.balance.format %></p>
+            <p class="title">€999</p>
           </div>
         </div>
         <div class="level-item has-text-centered">
@@ -28,7 +24,7 @@
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">Status</p>
-            <% if account.active? %>
+            <% if session.active? %>
               <p class="title has-text-success">ONLINE</p>
             <% else %>
               <p class="title has-text-danger">OFFLINE</p>
@@ -41,8 +37,6 @@
   <div class="card-footer">
     <%= link_to "Transactions", account_path(account), class: 'card-footer-item' %>
     <%= link_to "Edit", edit_account_path(account), class: 'card-footer-item' %>
-    <%= button_to "Relink", link_session_path(account.session), class: "card-footer-item" %>
-    <%= button_to "Reload balance", reload_balance_account_path(account), class: "card-footer-item" %>
-    <%= button_to "Reload transactions", reload_transactions_account_path(account), class: "card-footer-item" %>
+    <%= button_to "Relink", link_account_path(account), class: "card-footer-item" %>
   </div>
 </div>

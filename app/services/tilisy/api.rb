@@ -15,19 +15,19 @@ class Tilisy::Api
     conn.get('/aspsps').body
   end
 
-  def authorize_url_for(account, session_duration: 90.days)
-    state_token = account.generate_link_state_token
+  def authorize_url_for(session, session_duration: 90.days)
+    state_token = session.generate_link_state_token!
     response = conn.post('/auth') do |req|
       req.body = {
         access: {
           valid_until: Time.now.to_i + session_duration,
         },
         aspsp: {
-          name: account.bank,
-          country: account.country,
+          name: session.bank,
+          country: session.country,
         },
         state: state_token,
-        redirect_url: callback_accounts_url
+        redirect_url: callback_sessions_url
       }
     end
 
@@ -38,7 +38,7 @@ class Tilisy::Api
     end
   end
 
-  def session_for_code(code)
+  def redeem_session_code(session, code)
     response = conn.post('/sessions') do |req|
       req.body = {
         code: code
@@ -46,10 +46,45 @@ class Tilisy::Api
     end
 
     if response.status == 200
-      Tilisy::Session(conn, response.body)
+      session.activate_with(response.body)
+
+      session.accounts.each do |account|
+        fetch_balance(account)
+      end
     else
       raise Tilisy::Error.new("Error while requesting session: #{response.body}")
     end
+  end
+
+  def fetch_balance(account)
+    response = conn.get("/accounts/#{ account.uid }/balances") do |req|
+      req.headers['psu-geo-location'] = "0.0,0.0"
+    end
+
+    if response.status == 200
+      account.update_balance_with(response.body[:balances])
+    else
+      raise Tilisy::Error.new("Error while requesting balance: #{response.body}")
+    end
+  end
+
+  def fetch_transactions(account)
+    continuation_key = nil
+
+    begin
+      response = conn.get("/accounts/#{ account.uid }/transactions") do |req|
+        req.headers['psu-geo-location'] = "0.0,0.0"
+        req.headers['continuation-key'] = continuation_key
+      end
+
+      if response.status == 200
+        continuation = response.body[:continuation_key]
+        updated = account.update_transactions_with(response.body[:transactions])
+      else
+        raise Tilisy::Error.new("Error while requesting transactions: #{response.body}")
+      end
+
+    end while continuation.present? && updated > 0
   end
 
   private

@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: sessions
+#
+#  id               :bigint           not null, primary key
+#  active           :boolean          default(FALSE)
+#  bank             :string           not null
+#  country          :string           not null
+#  link_state_token :string
+#  uid              :string
+#  valid_until      :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+# column: value

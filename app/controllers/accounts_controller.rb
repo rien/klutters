@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ show edit update destroy link]
-  before_action :set_tilisy, only: %i[link callback]
+  before_action :set_account, only: %i[ show edit update destroy reload_balance reload_transactions]
+  before_action :set_tilisy, only: %i[reload_balance reload_transactions]
 
   # GET /accounts or /accounts.json
   def index
@@ -47,23 +47,22 @@ class AccountsController < ApplicationController
     redirect_to accounts_url, notice: "Account was successfully destroyed."
   end
 
-  def link
-    redirect_to @tilisy.authorize_url_for(@account), allow_other_host: true
+  def reload_balance
+    @tilisy.fetch_balance(@account)
+
+    redirect_to accounts_url, notice: "Account balance updated"
   end
 
-  def callback
-    @account = Account.find_by(link_state_token: params[:state])
-    @session = @tilisy.session_for_code(params[:code])
+  def reload_transactions
+    @tilisy.fetch_transactions(@account)
+
+    redirect_to accounts_url, notice: "Account transactions updated"
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
       @account = Account.find(params[:id])
-    end
-
-    def set_tilisy
-      @tilisy = Tilisy::Api.new
     end
 
     # Only allow a list of trusted parameters through.

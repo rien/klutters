@@ -1,0 +1,31 @@
+<%= form_with(model: session, action_name: "link") do |form| %>
+  <% if session.errors.any? %>
+    <div class="notification is-danger">
+      <h2><%= pluralize(session.errors.count, "error") %> prohibited this session from being saved:</h2>
+
+      <ul>
+        <% session.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :bank, class: "label" %>
+    <div class="control">
+      <%= form.text_field :bank, class: "input", value: "Mock ASPSP" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :country, class: "label" %>
+    <div class="control">
+      <%= form.text_field :country, class: "input", value: "DE" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.submit submit_text, class: "button" %>
+  </div>
+<% end %>

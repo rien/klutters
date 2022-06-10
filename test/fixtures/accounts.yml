@@ -3,18 +3,17 @@
 # Table name: accounts
 #
 #  id               :bigint           not null, primary key
-#  active           :boolean
 #  balance_cents    :integer          default(0), not null
 #  balance_currency :string           default("EUR"), not null
-#  bank             :string           not null
-#  country          :string           not null
-#  link_state_token :string
 #  name             :string           not null
-#  session          :string
 #  uid              :string
-#  valid_until      :datetime
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  session_id       :bigint
+#
+# Indexes
+#
+#  index_accounts_on_session_id  (session_id)
 #
 
 one:
