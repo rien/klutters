@@ -2,10 +2,10 @@
   <div class="card-content">
     <div class="media">
       <div class="media-content">
-        <% if account.name.blank? %>
+        <% if account.full_name.blank? %>
           <p class="title is-4 has-text-grey">Unnamed account</p>
         <% else %>
-          <p class="title is-4"><%= account.name %></p>
+          <p class="title is-4"><%= account.full_name %></p>
         <% end %>
         <p class="subtitle is-6"><%= account.bank %></p>
       </div>
@@ -22,7 +22,7 @@
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">Transactions</p>
-            <p class="title">123</p>
+            <p class="title"><%= account.transactions.count %></p>
           </div>
         </div>
         <div class="level-item has-text-centered">
@@ -41,8 +41,7 @@
   <div class="card-footer">
     <%= link_to "Transactions", account_path(account), class: 'card-footer-item' %>
     <%= link_to "Edit", edit_account_path(account), class: 'card-footer-item' %>
-    <%= button_to "Relink", link_session_path(account.session), class: "card-footer-item" %>
-    <%= button_to "Reload balance", reload_balance_account_path(account), class: "card-footer-item" %>
-    <%= button_to "Reload transactions", reload_transactions_account_path(account), class: "card-footer-item" %>
+    <%= button_to "Relink", link_session_path(account.session), form_class: "card-footer-item" %>
+    <%= button_to "Sync", sync_account_path(account), form_class: "card-footer-item" %>
   </div>
 </div>

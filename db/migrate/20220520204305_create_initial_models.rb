@@ -13,8 +13,10 @@ class CreateInitialModels < ActiveRecord::Migration[7.0]
 
     create_table :accounts do |t|
       t.string :uid
-      t.string :name,      null: false
-      t.boolean :verified, null: false, default: false
+      t.string :full_name,      null: false
+      t.string :short_name,     null: false
+      t.string :color,          null: false
+      t.boolean :verified,      null: false, default: false
 
       t.monetize :balance, null: false
 

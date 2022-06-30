@@ -1,0 +1,8 @@
+<div class="columns section">
+  <% @accounts.each do |account| %>
+    <div class="column">
+      <%= render 'accounts/account_card', account: account %>
+    </div>
+  <% end %>
+</div>
+

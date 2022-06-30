@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   resources :transactions
 
   resources :accounts do
-    post "reload_balance", on: :member
-    post "reload_transactions", on: :member
+    post "sync", on: :member
   end
 
   resources :sessions do

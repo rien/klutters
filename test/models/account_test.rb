@@ -5,8 +5,11 @@
 #  id               :bigint           not null, primary key
 #  balance_cents    :integer          default(0), not null
 #  balance_currency :string           default("EUR"), not null
-#  name             :string           not null
+#  color            :string           not null
+#  full_name        :string           not null
+#  short_name       :string           not null
 #  uid              :string
+#  verified         :boolean          default(FALSE), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  session_id       :bigint

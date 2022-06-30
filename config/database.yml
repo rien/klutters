@@ -29,6 +29,14 @@ development:
   url: <%= ENV['DATABASE_URL'] %>
   database: klutters_development
 
+staging:
+  <<: *default
+  username: klutters
+  password: klutters
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+  url: <%= ENV['DATABASE_URL'] %>
+  database: klutters_staging
+
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is

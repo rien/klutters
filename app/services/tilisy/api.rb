@@ -18,6 +18,8 @@ class Tilisy::Api
   def authorize_url_for(session, session_duration: 90.days)
     state_token = session.generate_link_state_token!
     response = conn.post('/auth') do |req|
+      redirect_url = Rails.application.config.tilisy_redirect_url
+      puts(redirect_url)
       req.body = {
         access: {
           valid_until: Time.now.to_i + session_duration,
@@ -27,7 +29,7 @@ class Tilisy::Api
           country: session.country,
         },
         state: state_token,
-        redirect_url: callback_sessions_url
+        redirect_url: redirect_url
       }
     end
 

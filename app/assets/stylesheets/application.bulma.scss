@@ -36,5 +36,26 @@
 // @import "bulma/sass/layout/hero.sass";
 // @import "bulma/sass/layout/section.sass";
 
+
 @import 'bulma/bulma';
 @import 'remixicon/fonts/remixicon';
+
+// fix card footer buttons to look like normal actions
+.card-footer {
+  .card-footer-item {
+    button {
+      color: $link;
+      background-color: inherit;
+      font-size: inherit;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      strong {
+        color: currentColor;
+      }
+      &:hover {
+        color: $link-hover;
+      }
+    }
+  }
+}

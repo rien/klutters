@@ -15,11 +15,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_182610) do
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.string "name", null: false
     t.string "uid"
-    t.bigint "session_id"
+    t.string "full_name", null: false
+    t.string "short_name", null: false
+    t.string "color", null: false
+    t.boolean "verified", default: false, null: false
     t.integer "balance_cents", default: 0, null: false
     t.string "balance_currency", default: "EUR", null: false
+    t.bigint "session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_accounts_on_session_id"
@@ -27,11 +30,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_182610) do
 
   create_table "sessions", force: :cascade do |t|
     t.string "uid"
+    t.string "link_state_token"
     t.datetime "valid_until", precision: nil
     t.string "bank", null: false
     t.string "country", null: false
-    t.string "link_state_token"
-    t.boolean "active", default: false
+    t.boolean "active", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

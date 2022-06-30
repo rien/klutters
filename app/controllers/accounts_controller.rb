@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ show edit update destroy reload_balance reload_transactions]
-  before_action :set_tilisy, only: %i[reload_balance reload_transactions]
+  before_action :set_account, only: %i[ show edit update destroy sync]
+  before_action :set_tilisy, only: %i[sync]
 
   # GET /accounts or /accounts.json
   def index
@@ -47,16 +47,11 @@ class AccountsController < ApplicationController
     redirect_to accounts_url, notice: "Account was successfully destroyed."
   end
 
-  def reload_balance
+  def sync
     @tilisy.fetch_balance(@account)
-
-    redirect_to accounts_url, notice: "Account balance updated"
-  end
-
-  def reload_transactions
     @tilisy.fetch_transactions(@account)
 
-    redirect_to accounts_url, notice: "Account transactions updated"
+    redirect_back_or_to account_url(@account)
   end
 
   private
@@ -67,6 +62,6 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:name, :bank, :country)
+      params.require(:account).permit(:full_name, :short_name, :color, :bank, :country)
     end
 end

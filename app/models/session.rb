@@ -3,7 +3,7 @@
 # Table name: sessions
 #
 #  id               :bigint           not null, primary key
-#  active           :boolean          default(FALSE)
+#  active           :boolean          default(FALSE), not null
 #  bank             :string           not null
 #  country          :string           not null
 #  link_state_token :string
@@ -32,7 +32,10 @@ class Session < ApplicationRecord
 
     json[:accounts].each do |json|
       account = Account.find_or_initialize_by(uid: json[:uid])
-      account.name ||= json[:name]
+      account.full_name ||= json[:name]
+      account.short_name ||= json[:name].split.first || ""
+      account.color ||= "hsl(#{ rand(360) }, 75%, 60%)"
+
       account.balance_currency = json[:currency]
       self.accounts << account
     end

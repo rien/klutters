@@ -5,8 +5,11 @@
 #  id               :bigint           not null, primary key
 #  balance_cents    :integer          default(0), not null
 #  balance_currency :string           default("EUR"), not null
-#  name             :string           not null
+#  color            :string           not null
+#  full_name        :string           not null
+#  short_name       :string           not null
 #  uid              :string
+#  verified         :boolean          default(FALSE), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  session_id       :bigint
@@ -24,7 +27,7 @@ class Account < ApplicationRecord
   monetize  :balance_cents
 
   validates :uid, presence: true
-  validates :name, presence:true, allow_blank: true
+  validates :short_name, :full_name, presence:true, allow_blank: true
 
   def update_balance_with(balances_json)
     bal = balances_json.find { |b| b[:balance_type] == 'XPCD'} || \

@@ -3,7 +3,7 @@
 # Table name: sessions
 #
 #  id               :bigint           not null, primary key
-#  active           :boolean          default(FALSE)
+#  active           :boolean          default(FALSE), not null
 #  bank             :string           not null
 #  country          :string           not null
 #  link_state_token :string
