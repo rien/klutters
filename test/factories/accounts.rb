@@ -17,16 +17,14 @@
 # Indexes
 #
 #  index_accounts_on_session_id  (session_id)
-#
 
-one:
-  name: MyString
-  bank: MyString
-  uid: MyString
-  valid_until: 2022-05-20 22:43:05
-
-two:
-  name: MyString
-  bank: MyString
-  uid: MyString
-  valid_until: 2022-05-20 22:43:05
+FactoryBot.define do
+  factory :account do
+    session
+    uid { Faker::Internet.uuid }
+    full_name { "Full Name of #{short_name}" }
+    short_name { "Account ##{Faker::Number.within(range: 1..20)}" }
+    color { Faker::Color.hex_color }
+    verified { true }
+  end
+end

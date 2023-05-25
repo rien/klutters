@@ -11,14 +11,14 @@
 #  valid_until      :datetime
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+FactoryBot.define do
+  factory :session do
+    active { true }
+    bank { Faker::Bank.name }
+    country { Faker::Address.country_code }
+    uid { Faker::Internet.uuid }
+    valid_until { Time.now + 1.hour }
+  end
+end

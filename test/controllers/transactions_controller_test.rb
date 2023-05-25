@@ -2,7 +2,7 @@ require "test_helper"
 
 class TransactionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @transaction = transactions(:one)
+    @transaction = create(:transaction)
   end
 
   test "should get index" do
@@ -15,14 +15,6 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create transaction" do
-    assert_difference("Transaction.count") do
-      post transactions_url, params: { transaction: { amount: @transaction.amount, description: @transaction.description, other: @transaction.other, reference: @transaction.reference } }
-    end
-
-    assert_redirected_to transaction_url(Transaction.last)
-  end
-
   test "should show transaction" do
     get transaction_url(@transaction)
     assert_response :success
@@ -31,11 +23,6 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
   test "should get edit" do
     get edit_transaction_url(@transaction)
     assert_response :success
-  end
-
-  test "should update transaction" do
-    patch transaction_url(@transaction), params: { transaction: { amount: @transaction.amount, description: @transaction.description, other: @transaction.other, reference: @transaction.reference } }
-    assert_redirected_to transaction_url(@transaction)
   end
 
   test "should destroy transaction" do

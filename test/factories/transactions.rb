@@ -18,16 +18,16 @@
 #
 #  index_transactions_on_account_id                (account_id)
 #  index_transactions_on_reference_and_account_id  (reference,account_id)
-#
 
-one:
-  amount: 
-  other: MyString
-  reference: MyString
-  description: MyString
-
-two:
-  amount: 
-  other: MyString
-  reference: MyString
-  description: MyString
+FactoryBot.define do
+  factory :transaction do
+    account
+    reference { Faker::Number.number(digits: 10) }
+    booked_at { Faker::Date.between(from: 1.year.ago, to: Date.today) }
+    amount_cents { Faker::Number.within(range: -100_00..100_00) }
+    amount_currency { "EUR" }
+    description { Faker::Lorem.sentence }
+    status { "booked" }
+    other { Faker::Company.name }
+  end
+end
