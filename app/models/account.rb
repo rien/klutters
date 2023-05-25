@@ -45,9 +45,9 @@ class Account < ApplicationRecord
       amount = parse_money(json[:transaction_amount])
       case json[:credit_debit_indicator]
       when "DBIT"
-        transaction.amount = amount
-      when "CRDT"
         transaction.amount = -amount
+      when "CRDT"
+        transaction.amount = amount
       else
         raise "Unrecognised credit_debit_indicator: #{json[:credit_debit_indicator]}"
       end

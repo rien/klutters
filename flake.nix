@@ -73,6 +73,14 @@
                 name = "DATABASE_HOST";
                 eval = "$PGDATA";
               }
+              {
+                name = "GEM_HOME";
+                eval = "$PRJ_DATA_DIR/ruby/vendor/bundle/$(ruby -e 'puts RUBY_VERSION')";
+              }
+              {
+                name = "PATH";
+                eval = "$GEM_HOME/bin:$PATH";
+              }
             ];
             commands = [
               {

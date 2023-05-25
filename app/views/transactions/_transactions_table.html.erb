@@ -1,36 +1,38 @@
-<table class="table is-striped is-fullwidth">
-  <thead>
-    <tr>
-      <th class="has-text-right">Account</th>
-      <th>Date</th>
-      <th>Amount</th>
-      <th>Payee</th>
-      <th>Description</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-  <% transactions.each do |transaction| %>
-    <tr>
-      <td class="has-text-right">
-        <span class="tag is-dark" style="background-color: <%= transaction.account.color %>">
-          <%= transaction.account.short_name %>
-        </span>
-      </td>
-      <td><%= transaction.booked_at %></td>
-      <% if transaction.amount.positive? %>
-        <td class="has-text-success-dark"><%= transaction.amount %></td>
-      <% else %>
-        <td class="has-text-danger-dark"><%= transaction.amount %></td>
-      <% end %>
-      <td><%= transaction.other %></td>
-      <td><%= transaction.description %></td>
-      <td>
-        <%= link_to transaction_path(transaction), class: 'button is-info is-light is-small' do %>
-          <i class="ri-edit-2-line"></i>
+<section class="box">
+  <table class="table is-striped is-fullwidth">
+    <thead>
+      <tr>
+        <th class="has-text-right">Account</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Payee</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% transactions.each do |transaction| %>
+      <tr>
+        <td class="has-text-right">
+          <span class="tag is-dark" style="background-color: <%= transaction.account.color %>">
+            <%= transaction.account.short_name %>
+          </span>
+        </td>
+        <td><%= transaction.booked_at %></td>
+        <% if transaction.amount.positive? %>
+          <td class="has-text-success-dark"><%= transaction.amount %></td>
+        <% else %>
+          <td class="has-text-danger-dark"><%= transaction.amount %></td>
         <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+        <td><%= transaction.other %></td>
+        <td><%= transaction.description %></td>
+        <td>
+          <%= link_to transaction_path(transaction), class: 'button is-info is-light is-small' do %>
+            <i class="ri-edit-2-line"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</section>

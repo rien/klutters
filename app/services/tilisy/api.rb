@@ -12,7 +12,11 @@ class Tilisy::Api
   end
 
   def aspsps
-    conn.get('/aspsps').body
+    @aspsps_data ||= conn.get('/aspsps').body
+  end
+
+  def banks(country)
+    @banks ||= aspsps.select { |aspsp| aspsp[:country] == country }
   end
 
   def authorize_url_for(session, session_duration: 90.days)

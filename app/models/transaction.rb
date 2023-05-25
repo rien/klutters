@@ -22,6 +22,8 @@
 class Transaction < ApplicationRecord
   belongs_to :account
 
+  default_scope { order({booked_at: :desc, id: :desc}) }
+
   monetize :amount_cents
 
   validates :amount, presence: true, allow_blank: true
