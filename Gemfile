@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
@@ -78,10 +78,10 @@ gem "annotate", "~> 3.2"
 
 gem "jwt", "~> 2.3"
 
-gem "ruby-debug-ide", "~> 2.3"
-
 gem "multi_json", "~> 1.15"
 
 gem "faraday-follow_redirects", "~> 0.3.0"
 
 gem "money-rails", "~> 1.15"
+
+gem "tailwindcss-rails", "~> 2.0"

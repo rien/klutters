@@ -5,20 +5,17 @@
     flake-utils.url = "github:numtide/flake-utils";
     devshell = {
       url = "github:numtide/devshell";
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = { self, nixpkgs, devshell, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; overlays = [ devshell.overlay ]; };
+        pkgs = import nixpkgs { inherit system; overlays = [ devshell.overlays.default ]; };
         gems = pkgs.bundlerEnv rec {
           name = "klutters-env";
-          ruby = pkgs.ruby_3_1;
+          ruby = pkgs.ruby_3_2;
           gemfile = ./Gemfile;
           lockfile = ./Gemfile.lock;
           gemset = ./gemset.nix;
@@ -32,7 +29,16 @@
             pname = "klutters";
             version = "0.1.0";
 
-            src = pkgs.lib.cleanSourceWith { filter = name: type: !(builtins.elem name [ ".github" "flake.lock" "flake.nix" ]); src = ./.; name = "source"; };
+            src = pkgs.lib.cleanSourceWith {
+              filter = name: type: !(builtins.elem name [ ".github" "flake.lock" "flake.nix" ]);
+              src = ./.;
+              name = "source"; 
+            };
+
+            buildPhase = ''
+              # Compile bootsnap cache
+              ${gems}/bin/bundle exec bootsnap precompile --gemfile app/ lib/
+            '';
 
             installPhase = ''
               mkdir $out
@@ -47,32 +53,25 @@
           default = klutters;
           klutters = pkgs.devshell.mkShell {
             name = "Klutters";
-            imports = [ "${devshell}/extra/language/c.nix" ];
+            imports = [ "${devshell}/extra/language/ruby.nix" ];
+            language.ruby = {
+              package = (pkgs.lowPrio gems.ruby );
+              nativeDeps = with pkgs; [ postgresql_14 ];
+            };
             packages = [
-              pkgs.ruby_3_1
-              #gems
               pkgs.bundix
               pkgs.nixpkgs-fmt
               pkgs.postgresql_14
               pkgs.yarn
-              pkgs.gnumake
             ];
             env = [
               {
                 name = "PGDATA";
-                eval = "$PWD/tmp/postgres";
+                eval = "$PRJ_DATA_DIR/postgres";
               }
               {
                 name = "DATABASE_HOST";
                 eval = "$PGDATA";
-              }
-              {
-                name = "GEM_HOME";
-                eval = "$PWD/vendor/bundle/$(ruby -e 'puts RUBY_VERSION')";
-              }
-              {
-                name = "PATH";
-                eval = "$GEM_HOME/bin:$PATH";
               }
             ];
             commands = [
@@ -113,11 +112,6 @@
                 '';
               }
             ];
-            language.c = {
-              compiler = pkgs.gcc;
-              includes = [ pkgs.postgresql_14 pkgs.openssl pkgs.zlib ];
-              libraries = [ pkgs.postgresql_14 pkgs.openssl pkgs.zlib ];
-            };
           };
         };
       }
