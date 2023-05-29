@@ -47,8 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_182610) do
     t.string "counterparty_account"
     t.string "raw_data", null: false
     t.string "transaction_type", null: false
-    t.string "description", null: false
-    t.string "status", null: false
+    t.string "description"
+    t.string "status"
     t.date "effective_at", null: false
     t.datetime "incurred_at"
     t.bigint "account_id"

@@ -7,8 +7,8 @@ class CreateTransactions < ActiveRecord::Migration[7.0]
       t.string    :counterparty_account
       t.string    :raw_data,          null: false
       t.string    :transaction_type,  null: false
-      t.string    :description,       null: false
-      t.string    :status,            null: false
+      t.string    :description
+      t.string    :status
       t.date      :effective_at,      null: false
       t.datetime  :incurred_at
 

@@ -42,7 +42,7 @@ class TransactionBuilder
     if @amount.nil?
       raise "Could not parse amount: #{@row["Bedrag"]} #{@row["Munt"]}"
     end
-    @description = @row["Mededeling"]
+    @description = @row["Mededeling"] || ""
     @counterparty = @row["Tegenpartij"]
     @counterparty_account = @row["Rekening tegenpartij"]
 

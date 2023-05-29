@@ -10,12 +10,28 @@
         <p class="subtitle is-6"><%= account.bank %></p>
       </div>
       <div class="media-right">
-        <button class="button" title="Import transactions from CSV">
-          <span class="icon is-small">
-            <i class="ri-upload-cloud-2-line"></i>
-          </span>
-          <span>Import</span>
-        </button>
+        <%= form_with model: account, url: import_account_path(account), method: :post, html: { id: "csv_import_form" } do |f| %>
+          <div class="file">
+            <label class="file-label">
+              <%= f.file_field(:csv, accept: 'text/csv', class: 'file-input') %>
+              <script>
+                window.addEventListener("load", function() {
+                  document.getElementById("account_csv").addEventListener("change", function() {
+                    document.getElementById("csv_import_form").submit();
+                  });
+                });
+              </script>
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="ri-upload-cloud-2-line"></i>
+                </span>
+                <span class="file-label">
+                  Import CSV
+                </span>
+              </span>
+            </label>
+          </div>
+        <% end %>
       </div>
     </div>
 

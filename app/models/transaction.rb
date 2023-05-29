@@ -7,12 +7,12 @@
 #  amount_currency      :string           default("EUR"), not null
 #  counterparty         :string
 #  counterparty_account :string
-#  description          :string           not null
+#  description          :string
 #  effective_at         :date             not null
 #  incurred_at          :datetime
 #  raw_data             :string           not null
 #  reference            :string
-#  status               :string           not null
+#  status               :string
 #  transaction_type     :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null

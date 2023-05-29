@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ show edit update destroy sync]
+  before_action :set_account, only: %i[ show edit update destroy sync import]
   before_action :set_tilisy, only: %i[sync]
 
   # GET /accounts or /accounts.json
@@ -52,6 +52,13 @@ class AccountsController < ApplicationController
     @tilisy.fetch_transactions(@account)
 
     redirect_back_or_to account_url(@account)
+  end
+
+  def import
+    importer = Importer::Csv.new(@account)
+    csv_file = params[:account][:csv].tempfile
+    transactions = importer.import(csv_file)
+    transactions.each(&:save!)
   end
 
   private
