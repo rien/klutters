@@ -42,7 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_182610) do
   create_table "transactions", force: :cascade do |t|
     t.integer "amount_cents", default: 0, null: false
     t.string "amount_currency", default: "EUR", null: false
-    t.string "other"
+    t.string "counterparty"
+    t.string "counterparty_account"
     t.string "raw_data", null: false
     t.string "transaction_type", null: false
     t.string "description", null: false

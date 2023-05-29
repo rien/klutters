@@ -16,7 +16,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     fill_in "Amount", with: @transaction.amount
     fill_in "Description", with: @transaction.description
-    fill_in "Other", with: @transaction.other
+    fill_in "Other", with: @transaction.counterparty
     fill_in "Reference", with: @transaction.reference
     click_on "Create Transaction"
 
@@ -30,7 +30,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     fill_in "Amount", with: @transaction.amount
     fill_in "Description", with: @transaction.description
-    fill_in "Other", with: @transaction.other
+    fill_in "Other", with: @transaction.counterparty
     fill_in "Reference", with: @transaction.reference
     click_on "Update Transaction"
 

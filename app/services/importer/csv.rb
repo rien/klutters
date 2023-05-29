@@ -29,7 +29,8 @@ class TransactionBuilder
       effective_at: @effective_at,
       initiated_at: @initiated_at,
       transaction_type: @transaction_type,
-      other: @other,
+      counterparty: @counterparty,
+      counterparty_account: @counterparty_account,
       raw_data: @row.to_s
     }
   end
@@ -42,18 +43,20 @@ class TransactionBuilder
       raise "Could not parse amount: #{@row["Bedrag"]} #{@row["Munt"]}"
     end
     @description = @row["Mededeling"]
-    @other = @row["Tegenpartij"]
+    @counterparty = @row["Tegenpartij"]
+    @counterparty_account = @row["Rekening tegenpartij"]
 
     case @transaction_type
-    when "Betaling Bancontact contactless", "Betaling Maestro contactless", "eCommerce Mobile"
+    when /Betaling (Bancontact|Maestro)( contactless)?/, /^eCommerce/, /^BC -/
       parse_from_description
-    when "Domicili?ring"
+    when /Domicili.ring/, "Uw doorlopende betalingsopdracht"
       @transaction_type = "Domiciliëring"
-      @other = @row["Tegenpartij"] + " " + @row["Rekening tegenpartij"]
-    when "Overschrijving via Crelan Mobile", "Domicili?ring", "Overschrijving in uw voordeel"
-      @other = @row["Tegenpartij"] + " " + @row["Rekening tegenpartij"]
-    when "Beheren vd rek Economy Plus Pack"
-      @other = "Crelan"
+    when /^Overschrijving/, /^Instantbetaling/, "Storting Banksys", "Terugbetaling transactie debetkaart"
+      # Nothing needs to be done
+    when /^Beheren vd rek/, /^Kosten/, /Betaling kredietlasten/
+      @counterparty = "Crelan"
+    when "Opneming Bancontact", "Maestro opneming"
+      @counterparty ||= "Cash"
     else
       raise "Unknown transaction type: #{@transaction_type}"
     end
@@ -61,10 +64,11 @@ class TransactionBuilder
   end
 
   def parse_from_description
-    re = /^(?<other>.*)\s(?<time>\d{2}-\d{2}-\d{4}\s\d{2}:\d{2}) (?<place>.*) 6703.*$/
-    captures = re.match(@description).named_captures
+    re = /^(?<counterparty>.*)?\s*(?<time>\d{2}-\d{2}-\d{4}\s\d{2}:\d{2}) (?<place>.*) 6703.*$/
+    captures = re.match(@description)&.named_captures
+
     @initiated_at = Time.strptime(captures["time"], "%d-%m-%Y %H:%M")
-    @other = captures["other"] + " " + captures["place"]
+    @counterparty = [captures["counterparty"], captures["place"]].select(&:present?).map(&:strip).join(" ")
   end
 end
 

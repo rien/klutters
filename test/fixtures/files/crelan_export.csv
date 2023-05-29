@@ -1,12 +1,24 @@
 Datum;Bedrag;Saldo na verrichting;Munt;Tegenpartij;Rekening tegenpartij;Type verrichting;Mededeling;Rekening opdrachtgever
-01/03/2022;-48.17;1173.64;EUR;4370 OKAY GENT         GENT;;Betaling Bancontact contactless;4370 OKAY GENT 01-03-2022 18:01 GENT 6703*********1000;B35 1030 1234 5678
-02/03/2022;-42.85;1130.79;EUR;PAYCONIQ               BRUXELLES;;eCommerce Mobile;PAYCONIQ 01-03-2022 21:16 BRUXELLES 6703*********1000;B35 1030 1234 5678
-02/03/2022;-107.83;1022.96;EUR;Eneco Belgium NV;BE50 0018 1567 6918;Domicili?ring;IN-182075115537;B35 1030 1234 5678
-02/03/2022;-3.50;1019.46;EUR;;;Beheren vd rek Economy Plus Pack;;B35 1030 1234 5678
-03/03/2022;2.50;1021.96;EUR;Mevr. Charlotte Parmentier;BE63 8636 6666 7777;Overschrijving in uw voordeel;;B35 1030 1234 5678
-03/03/2022;-2.50;1019.46;EUR;Dunkin' Brussel        BRUSSEL;;Betaling Bancontact contactless;Dunkin' Brussel 03-03-2022 18:07 BRUSSEL 6703*********1018;B35 1030 1234 5678
-07/03/2022;-20.00;999.46;EUR;Jan Janssen;BE04 8601 9876 5432;Overschrijving via Crelan Mobile;Drankjes op cafe;B35 1030 1234 5678
-08/03/2022;-72.70;926.76;EUR;Diksmuide       BE;;Betaling Maestro contactless;Restaurant 06-03-2022 19:42 Diksmuide BE 6703*********1000;B35 1030 1234 5678
-08/03/2022;-23.00;903.76;EUR;GENT            BE;;Betaling Maestro contactless;Takeaway 07-03-2022 20:18 GENT BE 6703*********1000;B35 1030 1234 5678
-08/03/2022;-48.17;855.59;EUR;4370 OKAY GENT         GENT;;Betaling Bancontact contactless;4370 OKAY GENT 08-03-2022 18:02 GENT 6703*********1000;B35 1030 1234 5678
-08/03/2022;-42.30;813.29;EUR;PAYCONIQ               BRUXELLES;;eCommerce Mobile;PAYCONIQ 08-03-2022 18:23 BRUXELLES 6703*********1000;B35 1030 1234 5678
+14/08/2020;250.00;;EUR;Mevr. Alice Alisson;BE63 8636 0000 0000;Overschrijving in uw voordeel;;BE35 1030 0000 0000
+14/08/2020;250.00;;EUR;Mr. John Johnson;BE34 3800 0000 0000;Instantbetaling in uw voordeel;GELD;BE35 1030 0000 0000
+14/08/2020;-50.00;;EUR;Bernadette Brendottir;BE20 8915 0000 0000;Overschrijving via Crelan Mobile;;BE35 1030 0000 0000
+24/08/2020;800.00;;EUR;Mr. John Johnson;BE34 3800 0000 0000;Overschrijving in uw voordeel;Flaperinos Maximos;BE35 1030 0000 0000
+27/08/2020;-830.00;;EUR;Mrs. Home Owner;BE14 2900 3965 0183;Uw doorlopende betalingsopdracht;Rent;BE35 1030 0000 0000
+01/09/2020;-64.01;;EUR;DELHAIZE GENT STGENT      9000;;Betaling Bancontact;DELHAIZE GENT ST 31-08-2020 19:07 GENT 670310*******1000;BE35 1030 0000 0000
+03/09/2020;-112.87;;EUR;OKAY GNT VOSK 43GENT      9000;;Betaling Bancontact contactless;OKAY GNT VOSK 43 03-09-2020 17:26 GENT 670310*******1000;BE35 1030 0000 0000
+08/09/2020;-97.95;;EUR;ZAVENTEM        BE;;eCommerce betaalkaart;IKEA E COMMERCE 07-09-2020 21:57 ZAVENTEM BE 670310*******1000;BE35 1030 0000 0000
+08/09/2020;-7.95;;EUR;SINT-DENIJS-W   BE;;Betaling Maestro;IKEA GENT-STORE 07-09-2020 16:57 SINT-DENIJS-W BE 670310*******1018;BE35 1030 0000 0000
+10/09/2020;-6.75;;EUR;Gent            BE;;Betaling Maestro contactless;HEMA EV407 Gent 09-09-2020 15:27 Gent BE 670310*******1018;BE35 1030 0000 0000
+14/09/2020;-121.03;;EUR;INTERNET;BE16 2930 0000 0000;Domicili?ring;200/1111/22222;BE35 1030 0000 0000
+05/01/2021;-3.00;;EUR;;;Beheren vd rek Eco Plus Pack (coop);;BE35 1030 0000 0000
+04/06/2021;-5.00;;EUR;;;Kosten niet-uitgevoerde dom.;1987654321;BE35 1030 0000 0000
+15/06/2021;-50.00;;EUR;IZEGEM         BE;;Maestro opneming;BEBOBANK AG IZEGEM 12-06-2021 11:59 IZEGEM BE 6703*********1018;BE35 1030 0000 0000
+14/07/2021;-80.00;;EUR;10-000150_Gent         Gent;;Opneming Bancontact;10-000000_Gent 13-07-2021 18:51 Gent 6703*********1000;BE35 1030 0000 0000
+28/07/2021;-17.37;;EUR;Burrido       Gent;;eCommerce Mobile;Burrido 28-07-2021 16:19 Gent 6703*********1000;BE35 1030 0000 0000
+01/10/2021;-5.00;;EUR;;;Kosten onuitgev. overschr. in euro;10000000;BE35 1030 0000 0000
+03/11/2021;7.20;;EUR;BANKSYS;BE61 0636 0000 0000;Storting Banksys;;BE35 1030 0000 0000
+04/01/2022;-3.50;;EUR;;;Beheren vd rek Economy Plus Pack;;BE35 1030 0000 0000
+19/07/2022;5.00;;EUR;ATOS WORLDLINE;BE47 6660 0000 0180;Terugbetaling transactie debetkaart;;BE35 1030 0000 0000
+06/02/2023;-666.00;;EUR;Vervaldag krediet - Ech?ance cr?dit;BE33 1030 0935 8346;Betaling kredietlasten;DOSSIERNUMMER : 12345;BE35 1030 0000 0000
+25/04/2023;-98.43;;EUR;4370 OKAY GENT         GENT;;BC - Uitg. verk. kruid./supermarkt;4370 OKAY GENT 25-04-2023 18:16 GENT 670310*******1000;BE35 1030 0000 0000
+28/04/2023;-174.60;;EUR;FOOD BVBA            Gent;;BC - Uitg. V. Betaling Winkel;FOOD BVBA 28-04-2023 15:18 Gent 670310*******1000;BE35 1030 0000 0000

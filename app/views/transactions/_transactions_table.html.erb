@@ -24,7 +24,7 @@
         <% else %>
           <td class="has-text-danger-dark"><%= transaction.amount %></td>
         <% end %>
-        <td><%= transaction.other %></td>
+        <td><%= transaction.counterparty %></td>
         <td><%= transaction.description %></td>
         <td>
           <%= link_to transaction_path(transaction), class: 'button is-info is-light is-small' do %>

@@ -2,19 +2,20 @@
 #
 # Table name: transactions
 #
-#  id               :bigint           not null, primary key
-#  amount_cents     :integer          default(0), not null
-#  amount_currency  :string           default("EUR"), not null
-#  description      :string           not null
-#  effective_at     :date             not null
-#  initiated_at     :datetime
-#  other            :string
-#  raw_data         :string           not null
-#  status           :string           not null
-#  transaction_type :string           not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  account_id       :bigint
+#  id                   :bigint           not null, primary key
+#  amount_cents         :integer          default(0), not null
+#  amount_currency      :string           default("EUR"), not null
+#  counterparty         :string
+#  counterparty_account :string
+#  description          :string           not null
+#  effective_at         :date             not null
+#  initiated_at         :datetime
+#  raw_data             :string           not null
+#  status               :string           not null
+#  transaction_type     :string           not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  account_id           :bigint
 #
 # Indexes
 #
@@ -32,6 +33,7 @@ FactoryBot.define do
     status { "booked" }
     transaction_type { "Betaling Bancontact contactless" }
     raw_data { "fake raw data" }
-    other { Faker::Company.name }
+    counterparty { Faker::Company.name }
+    counterparty_account { Faker::Boolean.boolean ? Faker::Bank.iban : nil }
   end
 end
