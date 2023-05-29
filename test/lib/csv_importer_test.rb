@@ -1,7 +1,6 @@
 require "test_helper"
 
 class CSVImporterTest < ActiveSupport::TestCase
-
   test "should import transactions from CSV" do
     @account = create(:account)
     @importer = Importer::Csv.new(@account)
@@ -44,13 +43,12 @@ class CSVImporterTest < ActiveSupport::TestCase
   def check_transactions(expected, actual)
     expected.each_with_index do |expected_transaction, index|
       actual_transaction = actual[index]
-      #debugger if actual_transaction.transaction_type.include?("krediet")
       assert_equal Date.parse(expected_transaction[:effective_date]), actual_transaction.effective_at
       assert_equal Money.new(expected_transaction[:amount]), actual_transaction.amount
       assert_includes actual_transaction.counterparty, expected_transaction[:counterparty]
       assert_includes actual_transaction.transaction_type, expected_transaction[:type]
       if expected_transaction[:initiated_date]
-        assert_equal Time.parse(expected_transaction[:initiated_date]), actual_transaction.initiated_at
+        assert_equal Time.parse(expected_transaction[:initiated_date]), actual_transaction.incurred_at
       end
     end
   end

@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_182610) do
   create_table "transactions", force: :cascade do |t|
     t.integer "amount_cents", default: 0, null: false
     t.string "amount_currency", default: "EUR", null: false
+    t.string "reference"
     t.string "counterparty"
     t.string "counterparty_account"
     t.string "raw_data", null: false
@@ -49,10 +50,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_182610) do
     t.string "description", null: false
     t.string "status", null: false
     t.date "effective_at", null: false
-    t.datetime "initiated_at"
+    t.datetime "incurred_at"
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id", "reference"], name: "index_transactions_on_account_id_and_reference", unique: true
     t.index ["account_id"], name: "index_transactions_on_account_id"
   end
 

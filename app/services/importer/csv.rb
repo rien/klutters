@@ -27,7 +27,7 @@ class TransactionBuilder
       amount: @amount,
       description: @description,
       effective_at: @effective_at,
-      initiated_at: @initiated_at,
+      incurred_at: @incurred_at,
       transaction_type: @transaction_type,
       counterparty: @counterparty,
       counterparty_account: @counterparty_account,
@@ -67,7 +67,7 @@ class TransactionBuilder
     re = /^(?<counterparty>.*)?\s*(?<time>\d{2}-\d{2}-\d{4}\s\d{2}:\d{2}) (?<place>.*) 6703.*$/
     captures = re.match(@description)&.named_captures
 
-    @initiated_at = Time.strptime(captures["time"], "%d-%m-%Y %H:%M")
+    @incurred_at = Time.strptime(captures["time"], "%d-%m-%Y %H:%M")
     @counterparty = [captures["counterparty"], captures["place"]].select(&:present?).map(&:strip).join(" ")
   end
 end

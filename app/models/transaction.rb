@@ -9,8 +9,9 @@
 #  counterparty_account :string
 #  description          :string           not null
 #  effective_at         :date             not null
-#  initiated_at         :datetime
+#  incurred_at          :datetime
 #  raw_data             :string           not null
+#  reference            :string
 #  status               :string           not null
 #  transaction_type     :string           not null
 #  created_at           :datetime         not null
@@ -19,16 +20,17 @@
 #
 # Indexes
 #
-#  index_transactions_on_account_id  (account_id)
+#  index_transactions_on_account_id                (account_id)
+#  index_transactions_on_account_id_and_reference  (account_id,reference) UNIQUE
 #
 class Transaction < ApplicationRecord
   belongs_to :account
 
-  default_scope { order({effective_at: :desc, id: :desc}) }
+  default_scope { order(Arel.sql('COALESCE(incurred_at, effective_at) DESC'), 'effective_at DESC', 'id DESC') }
 
   monetize :amount_cents
 
-  validate :initiated_before_effective, if: :initiated_at
+  validate :incurred_before_effective, if: :incurred_at
 
   validates :effective_at, presence: true
   validates :raw_data, presence: true
@@ -37,7 +39,7 @@ class Transaction < ApplicationRecord
   validates :description, presence: true, allow_blank: true
   validates :counterparty, presence: true, allow_blank: true
 
-  def initiated_before_effective
-    errors.add(:initiated_at, "can't be after effective_at") if initiated_at.to_date > effective_at
+  def incurred_before_effective
+    errors.add(:incurred_at, "can't be after effective_at") if incurred_at.to_date > effective_at
   end
 end
