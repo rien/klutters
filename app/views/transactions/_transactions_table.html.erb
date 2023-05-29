@@ -18,7 +18,7 @@
             <%= transaction.account.short_name %>
           </span>
         </td>
-        <td><%= transaction.booked_at %></td>
+        <td><%= transaction.effective_at %></td>
         <% if transaction.amount.positive? %>
           <td class="has-text-success-dark"><%= transaction.amount %></td>
         <% else %>

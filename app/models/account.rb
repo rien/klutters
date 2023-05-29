@@ -52,7 +52,7 @@ class Account < ApplicationRecord
         raise "Unrecognised credit_debit_indicator: #{json[:credit_debit_indicator]}"
       end
       transaction.status = json[:status]
-      transaction.booked_at = json[:booking_date]
+      transaction.effective_at = json[:booking_date]
       transaction.description = json[:remittance_information].join("\n")
 
       if transaction.changed?

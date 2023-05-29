@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :accounts do
     post "sync", on: :member
+    post "import", on: :member
   end
 
   resources :sessions do

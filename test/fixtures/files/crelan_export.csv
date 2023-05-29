@@ -1,0 +1,12 @@
+Datum;Bedrag;Saldo na verrichting;Munt;Tegenpartij;Rekening tegenpartij;Type verrichting;Mededeling;Rekening opdrachtgever
+01/03/2022;-48.17;1173.64;EUR;4370 OKAY GENT         GENT;;Betaling Bancontact contactless;4370 OKAY GENT 01-03-2022 18:01 GENT 6703*********1000;B35 1030 1234 5678
+02/03/2022;-42.85;1130.79;EUR;PAYCONIQ               BRUXELLES;;eCommerce Mobile;PAYCONIQ 01-03-2022 21:16 BRUXELLES 6703*********1000;B35 1030 1234 5678
+02/03/2022;-107.83;1022.96;EUR;Eneco Belgium NV;BE50 0018 1567 6918;Domicili?ring;IN-182075115537;B35 1030 1234 5678
+02/03/2022;-3.50;1019.46;EUR;;;Beheren vd rek Economy Plus Pack;;B35 1030 1234 5678
+03/03/2022;2.50;1021.96;EUR;Mevr. Charlotte Parmentier;BE63 8636 6666 7777;Overschrijving in uw voordeel;;B35 1030 1234 5678
+03/03/2022;-2.50;1019.46;EUR;Dunkin' Brussel        BRUSSEL;;Betaling Bancontact contactless;Dunkin' Brussel 03-03-2022 18:07 BRUSSEL 6703*********1018;B35 1030 1234 5678
+07/03/2022;-20.00;999.46;EUR;Jan Janssen;BE04 8601 9876 5432;Overschrijving via Crelan Mobile;Drankjes op cafe;B35 1030 1234 5678
+08/03/2022;-72.70;926.76;EUR;Diksmuide       BE;;Betaling Maestro contactless;Restaurant 06-03-2022 19:42 Diksmuide BE 6703*********1000;B35 1030 1234 5678
+08/03/2022;-23.00;903.76;EUR;GENT            BE;;Betaling Maestro contactless;Takeaway 07-03-2022 20:18 GENT BE 6703*********1000;B35 1030 1234 5678
+08/03/2022;-48.17;855.59;EUR;4370 OKAY GENT         GENT;;Betaling Bancontact contactless;4370 OKAY GENT 08-03-2022 18:02 GENT 6703*********1000;B35 1030 1234 5678
+08/03/2022;-42.30;813.29;EUR;PAYCONIQ               BRUXELLES;;eCommerce Mobile;PAYCONIQ 08-03-2022 18:23 BRUXELLES 6703*********1000;B35 1030 1234 5678

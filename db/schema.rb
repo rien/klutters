@@ -43,15 +43,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_182610) do
     t.integer "amount_cents", default: 0, null: false
     t.string "amount_currency", default: "EUR", null: false
     t.string "other"
-    t.string "reference", null: false
+    t.string "raw_data", null: false
+    t.string "transaction_type", null: false
     t.string "description", null: false
     t.string "status", null: false
-    t.date "booked_at", null: false
+    t.date "effective_at", null: false
+    t.datetime "initiated_at"
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_transactions_on_account_id"
-    t.index ["reference", "account_id"], name: "index_transactions_on_reference_and_account_id"
   end
 
 end
